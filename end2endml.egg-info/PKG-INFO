@@ -1,0 +1,12 @@
+Metadata-Version: 2.4
+Name: end2endml
+Version: 0.0.1
+Summary: End2End Machine Learning for Python
+Author: Vikrant
+Requires: numpy
+Requires: pandas
+Requires: matplotlib
+Requires: seaborn
+Dynamic: author
+Dynamic: requires
+Dynamic: summary
