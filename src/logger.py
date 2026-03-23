@@ -2,7 +2,6 @@ import logging
 import os
 import sys
 from datetime import datetime
-
 from src.execption import MyException
 
 LOG_FILE = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}.log"
@@ -17,10 +16,3 @@ logging.basicConfig(
     format = '%(asctime)s - %(levelname)s - %(message)s - %(name)s - %(lineno)d'
 )
 
-
-if __name__ == '__main__':
-    try:
-        a = 10/0
-    except MyException as ex:
-        logging.info("divided by zero")
-        raise MyException(ex,sys.exc_info()[0])
