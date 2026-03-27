@@ -2,17 +2,19 @@ import logging
 import os
 import sys
 from datetime import datetime
-from src.execption import MyException
+from src.fetch_config import GetConfig
 
-LOG_FILE = f"{datetime.now().strftime('%Y%m%d-%H%M%S')}.log"
-log_path = os.path.join(os.getcwd(),"logs")
-os.makedirs(os.path.dirname(log_path),exist_ok=True)
+script_name = os.path.splitext(os.path.basename(sys.argv[0]))[0]
+
+LOG_FILE = f"{script_name}_{datetime.now().strftime('%Y%m%d-%H%M%S')}.log"
+log_path = GetConfig(conf='config_path.yml', var='log', type='path').get()
+os.makedirs(log_path,exist_ok=True)
 
 LOG_FILE_PATH = os.path.join(log_path,LOG_FILE)
 
 logging.basicConfig(
     filename=LOG_FILE_PATH,
     level = logging.DEBUG,
-    format = '%(asctime)s - %(levelname)s - %(message)s - %(name)s - %(lineno)d'
+    format = f'%(asctime)s - %(levelname)s - %(message)s - {script_name} - %(lineno)d'
 )
 

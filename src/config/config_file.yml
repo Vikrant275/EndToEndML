@@ -1,0 +1,5 @@
+file:
+  input_data: stud.csv
+  train_data: train.csv
+  test_data: test.csv
+  raw_data: raw_data.csv
