@@ -8,7 +8,8 @@ import logging
 import src.logger
 from src.fetch_config import GetConfig
 
-
+#for testing purpose
+from src.components.data_transformation import  DataTransformation
 
 
 @dataclass  # it helps to define class self variable
@@ -22,7 +23,7 @@ class DataIngestion:
         self.ingestion_config = DataIngestionConfig() # consist of all value from DataIngestion class to this variable
 
 
-    def iniate_data_ingestion(self):  # it fun to helps read data from database
+    def initiate_data_ingestion(self):  # it fun to helps read data from database
         logging.info('Initializing data_ingestion and reading data ')
         import_path = GetConfig(conf='config_path.yml', var='input_data', type='path').get()
         file_name = GetConfig(conf='config_file.yml', var='input_data', type='file').get()
@@ -62,5 +63,10 @@ class DataIngestion:
 
 if __name__=='__main__':
     config = DataIngestion()
-    config.iniate_data_ingestion()
+    x_train,x_test = config.initiate_data_ingestion()
+
+    datatransform = DataTransformation()
+    datatransform.initiate_pipeline(x_train,x_test)
+
+
 
