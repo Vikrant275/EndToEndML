@@ -60,8 +60,6 @@ class DataTransformation:
             logging.info("Train  and test data loaded")
 
             logging.info("obtaining preprocessor object")
-            preprocessor_obj = self.get_data_transfromer_obj()
-            logging.info("preprocessor object constructed")
 
             target_col = 'math_score'
             input_train_feature = train_df.drop(columns=[target_col])
@@ -70,6 +68,8 @@ class DataTransformation:
             input_test_feature = test_df.drop(columns=[target_col])
             target_test_feature = test_df[target_col]
 
+            preprocessor_obj = self.get_data_transfromer_obj()
+            logging.info("preprocessor object constructed")
 
             logging.info(" applying preprocessor on training and testing dataframe")
 

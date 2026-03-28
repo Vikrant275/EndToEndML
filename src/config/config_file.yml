@@ -4,3 +4,4 @@ file:
   test_data: test.csv
   raw_data: raw_data.csv
   preprocessor: preprocessor_file.pkl
+  model: model_file.pkl
