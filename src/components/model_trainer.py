@@ -11,7 +11,7 @@ import os
 import sys
 from src.logger import logging
 from src.execption import MyException
-from src.fetch_config import GetConfig
+from src.fetch_config import GetConfig,GetParams
 
 from src.uitls import evaluate_model,save_object
 
@@ -45,10 +45,15 @@ class ModelTrainer:
                 "GradientBoostingRegressor": GradientBoostingRegressor(),
                 "XGBoostRegressor": XGBRegressor()
             }
+            try:
+                params = GetParams(conf='params.yml',models=models).get()
+            except Exception as e:
+                logging.error(e)
+                raise MyException(e,sys)
 
             try:
                 logging.info("Training model")
-                model_score = evaluate_model(models=models,x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test)
+                model_score = evaluate_model(models=models,x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,params=params)
                 best_model,score = max(model_score.items(), key=lambda kv: kv[1])
 
                 logging.info(f"Best model is {best_model} with score {score}")
