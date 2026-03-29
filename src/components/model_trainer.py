@@ -54,7 +54,9 @@ class ModelTrainer:
             try:
                 logging.info("Training model")
                 model_score = evaluate_model(models=models,x_train=x_train,y_train=y_train,x_test=x_test,y_test=y_test,params=params)
-                best_model,score = max(model_score.items(), key=lambda kv: kv[1])
+                best_model_name = max(model_score, key=lambda x: model_score[x]['score'])
+                best_model = model_score[best_model_name]['model']
+                score = model_score[best_model_name]['score']
 
                 logging.info(f"Best model is {best_model} with score {score}")
 
@@ -62,6 +64,7 @@ class ModelTrainer:
                     logging.warn("No model tarin properly")
                     raise MyException("The model has not been trained yet properly",sys)
 
+                print(f"------------------{best_model}--------------------------")
                 save_object(
                     file_path=self.train_model_config.train_model_conf_path,
                     obj=best_model,
